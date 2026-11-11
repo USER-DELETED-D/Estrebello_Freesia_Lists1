@@ -1,0 +1,51 @@
+items = []
+for i in range(5):
+    value = input(f"Enter item {i + 1}: ")
+    items.append(value)
+
+print("\nOriginal List: ", end="")
+for i in range(len(items)):          
+    print(items[i], end=", " if i < len(items) - 1 else "\n")
+
+while True:
+    update_index = int(input("\nInput Index to Update: "))
+    if 0 <= update_index < len(items):
+        break
+    print(f"Invalid index. Enter a number from 0 to {len(items) - 1}.")
+
+new_value = input("Input New Value: ")
+
+
+while True:
+    start = int(input("Enter Slice Range 1: "))
+    end = int(input("Enter Slice Range 2: "))
+    if 0 <= start < end <= len(items):
+        break
+    print(f"Invalid range. Start must be less than end, and both within 0 to {len(items)}.")
+
+search_item = input("Enter Search Item: ")
+
+
+sliced = items[start:end]            # slicing
+
+found_at = -1
+for i in range(len(sliced)):         # search using loop on the sliced list
+    if sliced[i].lower() == search_item.lower():
+        found_at = i
+        break
+
+items[update_index] = new_value      # update using indexing
+
+# ---------- OUTPUT ----------
+print("\n----- RESULTS -----")
+print(f"Index to Update: {update_index}")
+print(f"New Value: {new_value}")
+print(f"Sliced List: ({start}:{end}) " + ", ".join(sliced))
+
+if found_at != -1:
+    print(f"Search Result (from sliced array): '{search_item}' found at index {found_at} of the sliced list "
+          f"(index {start + found_at} of the original list)")
+else:
+    print(f"Search Result (from sliced array): '{search_item}' not found")
+
+print("Updated List: " + ", ".join(items))
